@@ -13,7 +13,7 @@ Small command line program for quickly adding ROMs for RetroPie.
     
     ./romcp [DIRECTORY]
     
-  Replacing [DIRECTORY] with the file the ROMs you wish to copy are contained.
+  Replacing [DIRECTORY] with the folder where the ROMs you wish to copy are contained.
     
 # Note
 - This program currently only supports SNES and Megadrive ROM files, more soon :P
