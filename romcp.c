@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
 
     char* buffer;
     int length;
-    
+
 
     //check if the dir exists
     if ((dir = opendir(argv[1])) != NULL) {
@@ -36,19 +36,39 @@ int main(int argc, char* argv[])
 
             }
 
-            if (strcmp(buffer, ".md") == 0 || strcmp(buffer, ".gen" == 0)
-                    || strcmp(buffer, ".smd") == 0 || strcmp(buffer, ".sg") == 0) {
+            // Megadrive
+            if (!strcmp(buffer, ".md") || !strcmp(buffer, ".gen")
+                    || !strcmp(buffer, ".smd") || !strcmp(buffer, ".sg")) {
                 systemcopy(ent->d_name, MEGADRIVE);
                 free(buffer);
-
-            } else if (strcmp(buffer, ".smc") == 0 || strcmp(buffer, ".sfc" == 0)
-                        || strcmp(buffer, ".fig") == 0 || strcmp(buffer, ".swc" == 0)
-                        || strcmp(buffer, ".mgd") == 0) {
+            // SNES
+            } else if (!strcmp(buffer, ".smc") || !strcmp(buffer, ".sfc")
+                        || !strcmp(buffer, ".fig") || !strcmp(buffer, ".swc")
+                        || !strcmp(buffer, ".mgd")) {
                 systemcopy(ent->d_name, SNES);
+                free(buffer);
+            // NES
+            } else if (!strcmp(buffer, ".nes")) {
+                systemcopy(ent->d_name, NES);
+                free(buffer);
+            // ZXSpectrum
+            } else if (!strcmp(buffer, ".sna") || !strcmp(buffer, ".szx")
+                        || !strcmp(buffer, ".z80") || !strcmp(buffer, ".tap")
+                        || !strcmp(buffer, ".tzx") || !strcmp(buffer, ".gz")
+                        || !strcmp(buffer, ".udi") || !strcmp(buffer, ".mgt")
+                        || !strcmp(buffer, ".trd") || !strcmp(buffer, ".scl")
+                        || !strcmp(buffer, ".dsk")) {
+                systemcopy(ent->d_name, ZXSPECTRUM);
+                free(buffer);
+            // PlayStation
+            } else if (!strcmp(buffer, ".bin") || !strcmp(buffer, ".cue")
+                        || !strcmp(buffer, ".cbn") || !strcmp(buffer, ".iso")) {
+                systemcopy(ent->d_name, PLAYSTATION);
                 free(buffer);
             }
 
-
+            //if (buffer != NULL)
+            //    free(buffer);
         }
 
         closedir(dir);
